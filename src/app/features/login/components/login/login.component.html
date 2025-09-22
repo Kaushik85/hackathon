@@ -1,0 +1,36 @@
+<div class="card flex justify-content-center">
+    <p-messages [(value)]="messages" [enableService]="false" [closable]="true" />
+</div>
+
+<div class="flex justify-content-center align-items-center h-full">
+
+    <div class="card flex justify-content-center" [style]="{marginTop: '100px'}">
+   
+        <p-card [style]="{ width: '95vw', maxWidth: '360px', padding: '20px'}">
+            
+            <div style="display: flex; align-items: center;">  <a routerLink="/home"><img src="../../../../../assets/favicon.ico" alt="hackathon" width="30" height="30" style="margin-right: 20px;"></a>
+                <span>
+                    <span style="font-weight: bold; font-size: x-large;">Login</span>
+                </span>
+            </div>
+            <div [style]="{paddingTop: '30px'}">
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="text" pInputText class="w-full" name="eamail" placeholder="Type your email"
+                        [(ngModel)]="email" />
+
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input type="password" pInputText class="w-full" name="password" placeholder="Type your password"
+                        [(ngModel)]="password" />
+
+                </div>
+                <p-button label="SIGN IN" styleClass="w-full" [style]="{'marginBottom': '5px'}" (onClick)="login()"></p-button>
+                <div class="mobile-hide">Not a member? <a routerLink="/register">Register</a></div>
+                <div class="desktop-hide">Not a member? <a routerLink="/register" style="margin-left: 5px;">Register</a></div>
+            </div>
+        </p-card>
+
+    </div>
+</div>

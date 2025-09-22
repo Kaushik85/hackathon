@@ -1,0 +1,208 @@
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { MenubarModule } from 'primeng/menubar';
+import { MenuItem, Message } from 'primeng/api';
+import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { MessagesModule } from 'primeng/messages';
+import { TableModule } from 'primeng/table';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { CardModule } from 'primeng/card';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { FormsModule } from '@angular/forms';
+import { TicketService } from '../../services/ticket.service';
+import { TicketRow } from '../../models/ticket-row';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { TicketComment } from '../../models/ticket-comment';
+
+@Component({
+  selector: 'app-ticket',
+  standalone: true,
+  imports: [TabMenuModule, MenubarModule, FormsModule, InputIconModule, IconFieldModule, TooltipModule, DialogModule, CardModule, TableModule, CommonModule, ButtonModule, MessagesModule, RouterLink, RouterOutlet],
+  templateUrl: './ticket.component.html',
+  styleUrl: './ticket.component.scss',
+  encapsulation: ViewEncapsulation.None
+})
+
+export class TicketComponent implements OnInit {
+  searchTerm: string = ''
+  messages: Message[] | any;
+  ticketRows: TicketRow[] = []
+  items: MenuItem[] | undefined;
+  activeItem: MenuItem | undefined;
+  
+  token: string | any
+  refreshInProgress: boolean = false
+
+  createTicketDialogVisible: boolean = false
+  viewDialogeVisible: boolean = false
+  userProvidedCategory: string = ''
+  userProvidedSubCategory: string = ''
+  userProvidedTopic: string = ''
+  userProvidedPriority: string = ''
+  userProvidedDescription: string = ''
+
+
+  constructor(private route: ActivatedRoute, private ticketService: TicketService, private router: Router) {
+
+  }
+
+  ngOnInit(): void {
+    this.items = [
+        {
+          label: 'My Tickets',
+          icon: 'pi pi-home'
+        },
+        {
+          label: 'Logout',
+          icon: 'pi pi-power-off',
+          style: { 'margin-left': 'auto' }
+        }
+    ]
+    this.activeItem = this.items[0];
+    this.fetchTickets();
+  }
+
+  onActiveItemChange(event: MenuItem) {
+    this.activeItem = event;
+    if (event.label === 'Logout') {
+      this.ticketService.logout()
+      this.router.navigate(['/login']);
+    } 
+    else if (event.label === 'My Tickets') {
+      this.router.navigate(['/tickets']);
+    }   
+  }
+
+  closeDiv() {
+    this.createTicketDialogVisible = false
+  }
+
+  private fetchTickets() {
+    this.refreshInProgress = true
+    this.ticketService.fetchTickets()
+      .subscribe({
+        next: (tickets: TicketRow[]) => {
+          this.refreshInProgress = false
+          this.ticketRows = tickets
+        },
+        error: (error) => {
+          this.refreshInProgress = false
+          console.error('Error fetching tickets:', error);
+          if (error instanceof HttpErrorResponse && error.status == HttpStatusCode.Forbidden) {
+            this.router.navigate(['/login'])
+          }
+          else {
+            this.messages = [{ severity: 'error', detail: error.error?.message || 'Failed to fetch tickets.' }];
+          }
+        }
+      });
+  }
+
+  refreshNow() {
+    this.fetchTickets()
+  }
+
+  viewDetails (ticketId: string) {
+    this.ticketService.getTicketDetails(ticketId)
+      .subscribe({
+        next: (ticketDetails) => {
+          console.log('Fetched comments:', ticketDetails);     
+          this.renderComments(ticketDetails.comments)
+        },      
+        error: (error) => {
+          if (error instanceof HttpErrorResponse && error.status == HttpStatusCode.Forbidden) {
+            this.router.navigate(['/login'])
+          }
+          else {
+            this.messages = [{ severity: 'error', detail: error.error?.message || 'Failed to fetch ticket details.' }];
+          }
+        }
+      });   
+
+  }
+
+  openTicketForm() {
+    this.createTicketDialogVisible = true
+  }
+
+  syncGcp() {
+    this.ticketService.syncToGcp()
+      .subscribe({
+        next: () => {     
+          this.messages = [{ severity: 'success', detail: 'GCP sync initiated.' }];
+        },      
+        error: (error) => {
+          if (error instanceof HttpErrorResponse && error.status == HttpStatusCode.Forbidden) {
+            this.router.navigate(['/login'])
+          }
+          else {
+            this.messages = [{ severity: 'error', detail: 'Failed to create ticket.' }];
+          }
+        }
+      });   
+
+        
+  }
+
+  submit() {
+    if (!this.userProvidedCategory || !this.userProvidedSubCategory || !this.userProvidedTopic || !this.userProvidedPriority || !this.userProvidedDescription) {
+      this.messages = [{ severity: 'error', detail: 'Please fill in all fields.' }];
+      return;
+    }
+    this.ticketService.createTicket(this.userProvidedCategory, this.userProvidedSubCategory, this.userProvidedTopic, this.userProvidedPriority, this.userProvidedDescription)
+      .subscribe({
+        next: (response) => {
+          this.createTicketDialogVisible = false
+          this.messages = [{ severity: 'success', detail: 'Ticket created.' }];
+          this.fetchTickets()
+          this.userProvidedCategory = ''
+          this.userProvidedSubCategory = ''
+          this.userProvidedTopic = ''
+          this.userProvidedPriority = ''
+          this.userProvidedDescription = ''
+        },
+        error: (error) => {
+          if (error instanceof HttpErrorResponse && error.status == HttpStatusCode.Forbidden) {
+            this.router.navigate(['/login'])
+          }
+          else {
+            this.messages = [{ severity: 'error', detail: 'Failed to create ticket.' }];
+          }
+        }
+      });
+  }
+
+   renderComments(comments : TicketComment[]) {
+      console.log('Rendering comments in renderer:', comments);
+      this.viewDialogeVisible = true
+      const commentsSection = document.getElementById('comments-section');
+      if (!commentsSection) {
+          console.error('Comments section element not found.');
+          return;
+      }
+      
+        commentsSection.innerHTML = '';
+        if (comments.length === 0) {
+            commentsSection.innerHTML = '<p class="text-gray-500 text-sm">No comments yet. Be the first to add one!</p>';
+        } else {
+            console.log('Number of comments to render:', comments.length);
+            for (let i = 0; i < comments.length; i++) {
+                    const comment = comments[i];
+                    console.log('Rendering comment:', comment);
+                    const commentBox = document.createElement('div');
+                    commentBox.className = 'comment-box';
+                    commentBox.innerHTML = `
+                        <p class="comment-author">${comment.author}</p>
+                        <p class="comment-date">${comment.date}</p>
+                        <p class="comment-text">${comment.message}</p>
+                    `;
+                    commentsSection.appendChild(commentBox);
+                }
+        }
+    }
+}

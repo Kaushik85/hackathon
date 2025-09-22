@@ -1,0 +1,154 @@
+<div class="card">
+    <p-tabMenu [model]="items" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)" />
+    <div class="card flex justify-content-center align-items-center">
+        <p-messages [(value)]="messages" [enableService]="false" [closable]="true" />
+    </div>
+
+    <div class="card flex flex-row">
+        <div [style]="{margin:'10px', marginLeft:'20px', marginBottom:'5px'}">
+            <p-button type="button" icon="pi pi-plus" label="TICKET" (click)="openTicketForm()"
+                severity="primary"></p-button>
+        </div>
+        <!--<div [style]="{margin:'10px', marginLeft:'20px', marginBottom:'5px'}">
+            <p-button type="button" icon="pi pi-plus" label="GCP" (click)="syncGcp()" severity="primary"></p-button>
+        </div>-->
+    </div>
+
+    <!-- Ticket Dialogues-->
+
+    <!-- The dialog window for viewing a ticket -->
+    <!-- The dialog window for viewing a ticket -->
+    <dialog id="ticket-dialog" class="modal-dialog">
+        <div class="dialog-content">
+            <div class="dialog-header">
+                <h2 id="dialog-title" class="dialog-title">Ticket Details</h2>
+                <button id="close-dialog-btn" class="close-btn">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="overflow-auto-y">
+                <!-- Ticket Description -->
+                <div class="description-box">
+                    <h3 class="description-title">Description</h3>
+                    <p id="dialog-description" class="description-text"></p>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h3 class="comments-title">Comments</h3>
+                    <div id="comments-section" class="comment-box-container">
+                        <!-- Comments will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Add Comment Form -->
+                <div>
+                    <h3 class="comments-title">Add a new comment</h3>
+                    <textarea id="new-comment-input" class="comment-input" placeholder="Type your comment here..."></textarea>
+                    <button id="add-comment-btn" class="add-comment-btn">
+                        Add Comment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+    
+
+    <!-- Ticket Dialogue ends-->
+
+    <!-- Create ticket form -->
+    <div *ngIf="createTicketDialogVisible" class="flex justify-content-center align-items-center h-full">
+        <p-card [style]="{ width: '95vw', maxWidth: '600px', padding: '20px', marginBottom: '20px'}">
+            <i class="pi pi-times" (click)="closeDiv()" style="color: red; float: right; font-size: 1rem"></i>
+            <div [style]="{paddingTop: '10px', margin:'10px', marginLeft: '20px', marginRight: '20px'}">
+                <div class="field">
+                    <label for="email">Category</label>
+                    <input type="text" pInputText class="w-full" name="userProvidedCategory"
+                        userProvidedCategory="Type your category" [(ngModel)]="userProvidedCategory" />
+                </div>
+                <div class="field">
+                    <label for="password">Sub category</label>
+                    <input type="text" pInputText class="w-full" name="userProvidedSubCategory"
+                        placeholder="Type your sub category" [(ngModel)]="userProvidedSubCategory" />
+                </div>
+                <div class="field">
+                    <label for="topic">Topic</label>
+                    <input type="text" pInputText class="w-full" name="userProvidedTopic" placeholder="Type your topic"
+                        [(ngModel)]="userProvidedTopic" />
+                </div>
+                <div class="field">
+                    <label for="topic">Priority</label>
+                    <input type="text" pInputText class="w-full" name="userProvidedPriority"
+                        placeholder="Type your priority" [(ngModel)]="userProvidedPriority" />
+                </div>
+
+                <div class="field" [style]="{marginTop:'20px'}">
+                    <label for="description"><b>Description</b></label>
+                    <div class="w-full">
+                        <textarea rows="4" cols="65" pInputTextarea [(ngModel)]="userProvidedDescription"
+                            style="max-width: 600px; width: 100%;"></textarea>
+                    </div>
+                </div>
+                <div [style]="{paddingTop: '10px'}">
+                    <p-button label="SUBMIT" styleClass="w-full" [style]="{'marginBottom': '5px'}"
+                        (onClick)="submit()"></p-button>
+                </div>
+            </div>
+
+        </p-card>
+    </div>
+
+    <!-- Ticket form ends -->
+
+    <div class="card" [style]="{marginLeft: '20px', marginRight: '20px', marginTop: '20px'}">
+        <p-table #dt2 [value]="ticketRows" [tableStyle]="{'min-width': '90rem'}"
+            [globalFilterFields]="['setName', 'createdByUserName', 'validatedByUserName', 'status']">
+            <ng-template pTemplate="caption">
+                <div>
+                    <p-iconField iconPosition="left" class="ml-auto">
+                        <p-inputIcon>
+                            <i class="pi pi-search"></i>
+                        </p-inputIcon>
+                        <input pInputText type="text" [(ngModel)]="searchTerm"
+                            (input)="dt2.filterGlobal(searchTerm, 'contains')" placeholder="Search question sets"
+                            style="padding-left: 30px;" />
+                        <i class="pi pi-refresh" style="font-size: 1.5rem; margin-left: 10px;" (click)="refreshNow()"
+                            *ngIf="!refreshInProgress"></i>
+                        <i class="pi pi-spin pi-spinner-dotted" style="font-size: 1.5rem; margin-left: 10px;"
+                            *ngIf="refreshInProgress"></i>
+                    </p-iconField>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr style="height:46px;">
+                    <th style="padding-left: 10px;" pSortableColumn="category">Category <p-sortIcon field="Category" />
+                    </th>
+                    <th pSortableColumn="subCategory">Sub category <p-sortIcon field="subCategory" /></th>
+                    <th pSortableColumn="topic">Topic <p-sortIcon field="topic" /></th>
+                    <th pSortableColumn="priority">Priority <p-sortIcon field="priority" /></th>
+                    <th pSortableColumn="ticketId">Ticket Id <p-sortIcon field="priority" /></th>
+                    <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
+                    <th></th>
+                    <th style="display: none;"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-ticketRow>
+                <tr style="height:50px">
+                    <td style="padding-left: 10px;">
+                        {{ticketRow.category}}
+                    </td>
+                    <td>{{ticketRow.subCategory}}</td>
+                    <td>{{ticketRow.topic}}</td>
+                    <td>{{ticketRow.priority}}</td>
+                    <td>{{ticketRow.ticketId}}</td>
+                    <td>{{ticketRow.status}}</td>
+                    <td><p-button label="VIEW" size="small"
+                            (onClick)="viewDetails(ticketRow.ticketId)" /></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

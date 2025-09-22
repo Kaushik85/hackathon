@@ -1,0 +1,16 @@
+
+@media (max-width: 768px) { /* Adjust the breakpoint as needed */
+    .desktop-hide {
+        display: flex;
+    }
+
+    .mobile-hide {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) { /* Adjust the breakpoint as needed */
+    .desktop-hide {
+        display: none;
+    }
+}

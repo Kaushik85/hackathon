@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Ticket Management System</title>
+    <!-- Google Font - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base and Global Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #E5E7EB;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            margin-right: auto;
+            margin-left: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /* Hero Section Styling */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            text-align: center;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+            max-width: 56rem;
+            margin-right: auto;
+            margin-left: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #F9FAFB;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+            color: #9CA3AF;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #2563EB;
+            color: #ffffff;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.15s ease-in-out;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background-color: #1D4ED8;
+            transform: scale(1.05);
+        }
+
+        /* Features Section Styling */
+        .features-section {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+            background-color: #030712;
+        }
+
+        .features-title {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #F9FAFB;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: #1F2937;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #374151;
+            transition: background-color 0.25s ease-in-out;
+        }
+
+        .feature-card:hover {
+            background-color: #374151;
+        }
+        
+        .feature-icon {
+            color: #60A5FA;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon svg {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #F9FAFB;
+        }
+
+        .feature-description {
+            color: #9CA3AF;
+        }
+
+        /* Footer Styling */
+        footer {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            background-color: #111827;
+            text-align: center;
+            color: #6B7280;
+        }
+
+        /* Responsive Breakpoints */
+        @media (min-width: 640px) {
+            .hero-title { font-size: 3rem; line-height: 1; }
+            .hero-subtitle { font-size: 1.25rem; line-height: 1.75rem; }
+            .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (min-width: 768px) {
+            .hero-title { font-size: 3.75rem; line-height: 1; }
+            .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        @media (min-width: 1024px) {
+            .md\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+        }
+
+        /* Text Gradient Effect */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #6EE7B7, #3B82F6);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <div class="py-6 px-4 md:px-8">
+        <nav class="container mx-auto flex items-center justify-between">
+            <a href="#" class="text-2xl font-bold text-gray-50">Agentic TMS</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <main class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Intelligent Ticket Management, Powered by
+                <span class="text-gradient">AI Agents</span>
+            </h1>
+            <p class="hero-subtitle">
+                Our system automates ticket routing, enriches data, and resolves issues in a single turn, so you can focus on what matters most.
+            </p>
+            <a href="/login" class="cta-button">
+                Login
+            </a>
+        </div>
+    </main>
+
+    <!-- Features Section -->
+    <div class="features-section">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h2 class="features-title">Key Features</h2>
+            <div class="feature-grid">
+                <!-- Feature Card 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 002.944 12c.047.89-.089 1.777-.384 2.652M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 002.944 12c.047.89-.089 1.777-.384 2.652"></path></svg>
+                    </div>
+                    <h3 class="feature-title">Intelligent Routing</h3>
+                    <p class="feature-description">Tickets are automatically categorized and assigned to the right team using semantic analysis.</p>
+                </div>
+                
+                <!-- Feature Card 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="feature-title">Multi-Tool Orchestration</h3>
+                    <p class="feature-description">Agents gather data from multiple systems to enrich tickets before they are submitted.</p>
+                </div>
+                
+                <!-- Feature Card 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="feature-title">Real-Time Solutions</h3>
+                    <p class="feature-description">Common issues can be identified and resolved instantly without human intervention.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Agentic Ticket Management System. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

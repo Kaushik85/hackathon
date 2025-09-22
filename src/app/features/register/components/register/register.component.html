@@ -1,0 +1,68 @@
+<div class="card flex justify-content-center">
+    <p-messages [(value)]="messages" [enableService]="false" [closable]="true" />
+</div>
+<div [style.display]="verificationInProgress ? 'block' : 'none'">
+    <div class="card flex justify-content-center align-items-center h-full">
+        <div>
+            <p-card [style]="{ width: '95vw', maxWidth: '500px',padding: '20px'}">
+                <div class="card flex justify-content-center">
+                    <i class="pi pi-envelope" style="color: green; font-size: 4rem; margin: 10px;"></i>
+                </div>
+                <ng-template pTemplate="header">
+                    <div class="card flex justify-content-center" style="margin: 20px;">
+                        <h3>Please verify your email</h3>
+                    </div>
+                </ng-template>
+                <div [style]="{marginTop: '20px'}">
+                    <div class="card flex justify-content-center">
+                        <span>You are almost there! We sent an email to</span>
+                    </div>
+                    <div class="card flex justify-content-center" style="margin: 10px;">
+                        <span><b>{{email}}</b></span>
+                    </div>
+                    <div class="card flex justify-content-center">
+                        <span>Just click in the link in that email to complete your signup. If you don't see it, you may
+                            need to <b>check your spam</b> folder</span>
+                    </div>
+                </div>
+            </p-card>
+        </div>
+    </div>
+</div>
+<div [style.display]="verificationInProgress ? 'none' : 'block'">
+    <div class="flex justify-content-center align-items-center h-full">
+        <div class="card flex justify-content-center" [style]="{marginTop: '50px'}">
+            <p-card [style]="{ width: '95vw', maxWidth: '360px' , padding: '20px'}">
+                <div style="display: flex; align-items: center;">  <a routerLink="/home"><img src="../../../../../assets/favicon.ico" alt="classscan ai" width="30" height="30" style="margin-right: 20px;"></a>
+                    <span>
+                        <span style="font-weight: bold; font-size: x-large;">Register</span>
+                    </span>
+                </div>
+                <div [style]="{paddingTop: '30px'}">
+                    <div class="field">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" pInputText class="w-full" name="fullName" placeholder="Type your name"
+                            [(ngModel)]="fullName" />
+                    </div>
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input type="text" pInputText class="w-full" name="email" placeholder="Type your email"
+                            [(ngModel)]="email" />
+                    </div>
+                    <div class="field">
+                        <label for="password">Password</label>
+                        <input type="password" pInputText class="w-full" name="password"
+                            placeholder="Type password (example - Abcd$1234)" [(ngModel)]="password" />
+                    </div>
+                    <div class="field">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" pInputText class="w-full" name="confirmPassword"
+                            placeholder="Confirm password" [(ngModel)]="confirmPassword" />
+                    </div>
+                    <p-button label="REGISTER" styleClass="w-full" (onClick)="register()"></p-button>
+                    <div class="mt-2">Already a member? <a routerLink="/login">Login</a></div>
+                </div>
+            </p-card>
+        </div>
+    </div>
+</div>
