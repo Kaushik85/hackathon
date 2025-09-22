@@ -110,8 +110,7 @@
     <!-- Ticket form ends -->
 
     <div class="card" [style]="{marginLeft: '20px', marginRight: '20px', marginTop: '20px'}">
-        <p-table #dt2 [value]="ticketRows" [tableStyle]="{'min-width': '90rem'}"
-            [globalFilterFields]="['setName', 'createdByUserName', 'validatedByUserName', 'status']">
+        <p-table #dt2 [value]="ticketRows" [tableStyle]="{'min-width': '90rem'}" [globalFilterFields]="['category', 'subCategory', 'topic', 'priority', 'ticketId', 'status']">
             <ng-template pTemplate="caption">
                 <div>
                     <p-iconField iconPosition="left" class="ml-auto">
@@ -119,7 +118,7 @@
                             <i class="pi pi-search"></i>
                         </p-inputIcon>
                         <input pInputText type="text" [(ngModel)]="searchTerm"
-                            (input)="dt2.filterGlobal(searchTerm, 'contains')" placeholder="Search question sets"
+                            (input)="dt2.filterGlobal(searchTerm, 'contains')" placeholder="Search tickets"
                             style="padding-left: 30px;" />
                         <i class="pi pi-refresh" style="font-size: 1.5rem; margin-left: 10px;" (click)="refreshNow()"
                             *ngIf="!refreshInProgress"></i>
@@ -135,7 +134,7 @@
                     <th pSortableColumn="subCategory">Sub category <p-sortIcon field="subCategory" /></th>
                     <th pSortableColumn="topic">Topic <p-sortIcon field="topic" /></th>
                     <th pSortableColumn="priority">Priority <p-sortIcon field="priority" /></th>
-                    <th pSortableColumn="ticketId">Ticket Id <p-sortIcon field="priority" /></th>
+                    <th pSortableColumn="ticketId">Ticket Id <p-sortIcon field="ticketId" /></th>
                     <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
                     <th></th>
                     <th style="display: none;"></th>
