@@ -9,7 +9,6 @@ import { AuthenticationResponse } from '../../login/models/authentication-respon
   providedIn: 'root'
 })
 export class UserService {
-  //BASE_URL = "https://d2dnyjiamvi44a.cloudfront.net";
   BASE_URL = "http://localhost:8080";
 
   token: string | any
