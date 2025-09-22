@@ -46,7 +46,10 @@ export class TicketComponent implements OnInit {
   userProvidedTopic: string = ''
   userProvidedPriority: string = ''
   userProvidedDescription: string = ''
+  userProvidedComment: string = ''
+  activeTicketId: string = ''
 
+  activeDescription: string = ''
 
   constructor(private route: ActivatedRoute, private ticketService: TicketService, private router: Router) {
 
@@ -109,10 +112,13 @@ export class TicketComponent implements OnInit {
   }
 
   viewDetails (ticketId: string) {
+    this.activeTicketId = ticketId
     this.ticketService.getTicketDetails(ticketId)
       .subscribe({
         next: (ticketDetails) => {
           console.log('Fetched comments:', ticketDetails);     
+          this.activeDescription = ticketDetails.description
+          console.log('Fetched description:', this.activeDescription);
           this.comments = ticketDetails.comments
           this.viewDialogeVisible = true
         },      
@@ -174,6 +180,29 @@ export class TicketComponent implements OnInit {
           }
           else {
             this.messages = [{ severity: 'error', detail: 'Failed to create ticket.' }];
+          }
+        }
+      });
+  }
+
+  submitComment() {
+    this.ticketService.submitComment(this.activeTicketId, this.userProvidedComment)
+      .subscribe({
+        next: (response) => {
+          this.viewDialogeVisible = false
+          this.activeTicketId = ''
+          this.userProvidedComment = ''
+          this.messages = [{ severity: 'success', detail: 'Comment submitted.' }];
+        },
+        error: (error) => {
+          this.viewDialogeVisible = false
+          this.activeTicketId = ''
+          this.userProvidedComment = ''
+          if (error instanceof HttpErrorResponse && error.status == HttpStatusCode.Forbidden) {
+            this.router.navigate(['/login'])
+          }
+          else {
+            this.messages = [{ severity: 'error', detail: error.error?.message || 'Failed to submit comment.' }];
           }
         }
       });

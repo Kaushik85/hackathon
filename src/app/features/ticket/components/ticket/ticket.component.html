@@ -24,7 +24,9 @@
 				<!-- Ticket Description -->
 				<div class="description-box">
 					<h3 class="description-title">Description</h3>
-					<p id="dialog-description" class="description-text"></p>
+					<!--<p id="dialog-description" class="description-text" [(ngModel)]="activeDescription"></p>-->
+                    <textarea id="new-comment-input" class="comment-input" [(ngModel)]="activeDescription" [disabled]="true" placeholder="Type your comment here..."></textarea>
+					
 				</div>
 
 				<!-- Comments Section -->
@@ -48,10 +50,13 @@
 				<!-- Add Comment Form -->
 				<div>
 					<h3 class="comments-title">Add a new comment</h3>
-					<textarea id="new-comment-input" class="comment-input" placeholder="Type your comment here..."></textarea>
-					<button id="add-comment-btn" class="add-comment-btn">
+					<textarea id="new-comment-input" class="comment-input" [(ngModel)]="userProvidedComment" placeholder="Type your comment here..."></textarea>
+					<!--<button id="add-comment-btn" class="add-comment-btn">
 						Add Comment
-					</button>
+					</button>-->
+
+                    <p-button type="button" label="Add Comment" (click)="submitComment()"
+                severity="primary"></p-button>
 				</div>
 			</div>
 		</div>

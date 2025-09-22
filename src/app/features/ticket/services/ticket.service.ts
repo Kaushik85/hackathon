@@ -45,4 +45,12 @@ BASE_URL: string = ''
     this.userService.removeToken()
   }
 
+  submitComment(ticketId: string, message: string) : Observable<void>{
+    return this.httpClient.post<void>(`${this.BASE_URL}/api/tickets/${ticketId}/comments`, 
+    {
+      message: message
+    },
+    {headers: this.userService.getAuthorizationHeader()});
+  }
+
 }
