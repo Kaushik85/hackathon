@@ -9,9 +9,6 @@
             <p-button type="button" icon="pi pi-plus" label="TICKET" (click)="openTicketForm()"
                 severity="primary"></p-button>
         </div>
-        <!--<div [style]="{margin:'10px', marginLeft:'20px', marginBottom:'5px'}">
-            <p-button type="button" icon="pi pi-plus" label="GCP" (click)="syncGcp()" severity="primary"></p-button>
-        </div>-->
     </div>
 
     <!-- Ticket Dialogues-->
@@ -90,7 +87,11 @@
                     <input type="text" pInputText class="w-full" name="userProvidedPriority"
                         placeholder="Type your priority" [(ngModel)]="userProvidedPriority" />
                 </div>
-
+                <div class="field">
+                    <label for="topic">Assign to</label>
+                    <input type="text" pInputText class="w-full" name="userProvidedAssignee"
+                        placeholder="Type email id of the assignee" [(ngModel)]="userProvidedAssignee" />
+                </div>                
                 <div class="field" [style]="{marginTop:'20px'}">
                     <label for="description"><b>Description</b></label>
                     <div class="w-full">

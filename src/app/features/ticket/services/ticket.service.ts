@@ -24,14 +24,15 @@ BASE_URL: string = ''
     return this.httpClient.get<TicketRow []>(`${this.BASE_URL}/api/tickets/fetch`, {headers: this.userService.getAuthorizationHeader()});
   }
 
-  createTicket(category: string, subCategory: string, topic: string, priority: string, description: string) : Observable<void>{
+  createTicket(category: string, subCategory: string, topic: string, priority: string, description: string, assignee: string) : Observable<void>{
     return this.httpClient.post<void>(`${this.BASE_URL}/api/tickets/submit`, 
     {
       category: category,
       subCategory: subCategory,
       topic: topic,
       priority: priority,
-      description: description
+      description: description,
+      assignee: assignee
     },
     {headers: this.userService.getAuthorizationHeader()});
   }

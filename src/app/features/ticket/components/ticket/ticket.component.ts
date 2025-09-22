@@ -48,6 +48,7 @@ export class TicketComponent implements OnInit {
   userProvidedDescription: string = ''
   userProvidedComment: string = ''
   activeTicketId: string = ''
+  userProvidedAssignee: string = ''
 
   activeDescription: string = ''
 
@@ -162,7 +163,7 @@ export class TicketComponent implements OnInit {
       this.messages = [{ severity: 'error', detail: 'Please fill in all fields.' }];
       return;
     }
-    this.ticketService.createTicket(this.userProvidedCategory, this.userProvidedSubCategory, this.userProvidedTopic, this.userProvidedPriority, this.userProvidedDescription)
+    this.ticketService.createTicket(this.userProvidedCategory, this.userProvidedSubCategory, this.userProvidedTopic, this.userProvidedPriority, this.userProvidedDescription, this.userProvidedAssignee)
       .subscribe({
         next: (response) => {
           this.createTicketDialogVisible = false
@@ -173,6 +174,7 @@ export class TicketComponent implements OnInit {
           this.userProvidedTopic = ''
           this.userProvidedPriority = ''
           this.userProvidedDescription = ''
+          this.userProvidedAssignee = ''
         },
         error: (error) => {
           if (error instanceof HttpErrorResponse && error.status == HttpStatusCode.Forbidden) {
