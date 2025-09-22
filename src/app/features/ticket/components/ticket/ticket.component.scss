@@ -1,17 +1,17 @@
 .p-menubar {
-   border-radius: 0%;
+    border-radius: 0%;
 }
 
 .p-tabmenu {
-   padding-left: 20px;
-   padding-right: 20px;
-   padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
 }
 
 .p-menuitem-text {
-   color: #444;
-   font-weight: 500;
-   font-size: small;
+    color: #444;
+    font-weight: 500;
+    font-size: small;
 }
 
 
@@ -19,166 +19,188 @@
 
 
 .modal-dialog {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-            visibility: hidden;
-            opacity: 0;
-        }
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+}
 
-        .modal-dialog.visible {
-            visibility: visible;
-            opacity: 1;
-        }
-        
-        .dialog-content {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            padding: 1.5rem 2rem;
-            width: 100%;
-            max-width: 56rem; /* Corresponds to max-w-4xl */
-            max-height: 90vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
+.modal-dialog.visible {
+    visibility: visible;
+    opacity: 1;
+}
 
-        .dialog-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
+.dialog-content {
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    padding: 1.5rem 2rem;
+    width: 100%;
+    max-width: 56rem;
+    /* Corresponds to max-w-4xl */
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
 
-        .dialog-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1f2937;
-        }
-        
-        .close-btn {
-            color: #6b7280;
-            transition: color 0.2s ease-in-out;
-        }
-        
-        .close-btn:hover {
-            color: #4b5563;
-        }
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
 
-        .overflow-auto-y {
-            overflow-y: auto;
-            padding-right: 1rem;
-            flex-grow: 1;
-        }
-        
-        .description-box {
-            background-color: #f9fafb;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .description-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #4b5563;
-            margin-bottom: 0.5rem;
-        }
+.dialog-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+}
 
-        .description-text {
-            color: #4b5563;
-            line-height: 1.625;
-        }
+.close-btn {
+    color: #6b7280;
+    transition: color 0.2s ease-in-out;
+}
 
-        .comments-section {
-            margin-bottom: 1.5rem;
-        }
+.close-btn:hover {
+    color: #4b5563;
+}
 
-        .comments-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #4b5563;
-            margin-bottom: 1rem;
-        }
+.overflow-auto-y {
+    overflow-y: auto;
+    padding-right: 1rem;
+    flex-grow: 1;
+}
 
-        .comment-box-container {
-            display: flex;
-            flex-direction: column;
-            row-gap: 1rem;
-        }
-        
-        .comment-box {
-            background-color: #f3f4f6;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        }
+.description-box {
+    background-color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
 
-        .comment-author {
-            font-weight: 600;
-            color: #1f2937;
-        }
-        
-        .comment-date {
-            font-size: 0.875rem;
-            color: #6b7280;
-        }
-        
-        .comment-text {
-            margin-top: 0.5rem;
-            color: #4b5563;
-            line-height: 1.5;
-        }
+.description-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: 0.5rem;
+}
 
-        .add-comment-section {
-            padding-top: 1.5rem;
-            border-top: 1px solid #e5e7eb;
-        }
-        
-        .comment-input {
-            width: 100%;
-            height: 6rem;
-            padding: 1rem;
-            color: #4b5563;
-            border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
-            transition-property: all;
-            transition-duration: 0.2s;
-            outline: none;
-        }
-        
-        .comment-input:focus {
-            ring-color: #3b82f6;
-            border-color: #3b82f6;
-        }
-        
-        .add-comment-btn {
-            margin-top: 1rem;
-            padding: 0.75rem 1.5rem;
-            background-color: #2563eb;
-            color: #ffffff;
-            border-radius: 9999px;
-            font-weight: 600;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition-property: transform;
-            transition-duration: 0.2s;
-            outline: none;
-        }
-        
-        .add-comment-btn:hover {
-            background-color: #1d4ed8;
-            transform: scale(1.05);
-        }
+.description-text {
+    color: #4b5563;
+    line-height: 1.625;
+}
+
+.comments-section {
+    margin-bottom: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.comments-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: 1rem;
+}
+
+.comment-box-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+/* Improve padding and layout for comment cards */
+.comment-box-container .p-card {
+    border-radius: 8px;
+}
+.comment-box-container .p-card .p-card-header {
+    padding: 0.75rem 1.25rem;
+}
+.comment-box-container .p-card .p-card-body {
+    padding: 1rem 1.25rem;
+}
+
+.comment-box {
+    background-color: #f3f4f6;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.comment-author {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.comment-date {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.comment-text {
+    margin-top: 0.5rem;
+    color: #4b5563;
+    line-height: 1.5;
+}
+
+.add-comment-section {
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.comment-input {
+    width: 100%;
+    height: 6rem;
+    padding: 1rem;
+    color: #4b5563;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    transition-property: all;
+    transition-duration: 0.2s;
+    outline: none;
+}
+
+.comment-input:focus {
+    ring-color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.add-comment-btn {
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #2563eb;
+    color: #ffffff;
+    border-radius: 9999px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition-property: transform;
+    transition-duration: 0.2s;
+    outline: none;
+}
+
+.add-comment-btn:hover {
+    background-color: #1d4ed8;
+    transform: scale(1.05);
+}
+
+/* Comfortable padding for PrimeNG dialog to improve overall content look */
+.p-dialog .p-dialog-header {
+    padding: 1rem 1.5rem;
+}
+.p-dialog .p-dialog-content {
+    padding: 1.25rem 1.5rem 1.5rem 1.5rem;
+}

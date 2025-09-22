@@ -16,45 +16,46 @@
 
     <!-- Ticket Dialogues-->
 
-    <!-- The dialog window for viewing a ticket -->
-    <!-- The dialog window for viewing a ticket -->
-    <dialog id="ticket-dialog" class="modal-dialog">
-        <div class="dialog-content">
-            <div class="dialog-header">
-                <h2 id="dialog-title" class="dialog-title">Ticket Details</h2>
-                <button id="close-dialog-btn" class="close-btn">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
+	<!-- The dialog window for viewing a ticket -->
+	<p-dialog [(visible)]="viewDialogeVisible" [modal]="true" header="Ticket Details" [draggable]="false" [resizable]="false" [style]="{ width: '95vw', maxWidth: '800px' }">
+		<div class="dialog-content">
+			
+			<div class="overflow-auto-y">
+				<!-- Ticket Description -->
+				<div class="description-box">
+					<h3 class="description-title">Description</h3>
+					<p id="dialog-description" class="description-text"></p>
+				</div>
 
-            <div class="overflow-auto-y">
-                <!-- Ticket Description -->
-                <div class="description-box">
-                    <h3 class="description-title">Description</h3>
-                    <p id="dialog-description" class="description-text"></p>
-                </div>
+				<!-- Comments Section -->
+				<div class="comments-section">
+					<h3 class="comments-title">Comments</h3>
+					<ng-container *ngIf="comments?.length">
+						<div id="comments-section" class="comment-box-container">
+							<p-card *ngFor="let c of comments" [style]="{ marginBottom: '10px' }">
+								<ng-template pTemplate="header">
+									<div class="flex justify-content-between">
+										<span>{{ c.author }}</span>
+										<small>{{ c.date }}</small>
+									</div>
+								</ng-template>
+								<p>{{ c.message }}</p>
+							</p-card>
+						</div>
+					</ng-container>
+				</div>
 
-                <!-- Comments Section -->
-                <div class="comments-section">
-                    <h3 class="comments-title">Comments</h3>
-                    <div id="comments-section" class="comment-box-container">
-                        <!-- Comments will be populated here -->
-                    </div>
-                </div>
-
-                <!-- Add Comment Form -->
-                <div>
-                    <h3 class="comments-title">Add a new comment</h3>
-                    <textarea id="new-comment-input" class="comment-input" placeholder="Type your comment here..."></textarea>
-                    <button id="add-comment-btn" class="add-comment-btn">
-                        Add Comment
-                    </button>
-                </div>
-            </div>
-        </div>
-    </dialog>
+				<!-- Add Comment Form -->
+				<div>
+					<h3 class="comments-title">Add a new comment</h3>
+					<textarea id="new-comment-input" class="comment-input" placeholder="Type your comment here..."></textarea>
+					<button id="add-comment-btn" class="add-comment-btn">
+						Add Comment
+					</button>
+				</div>
+			</div>
+		</div>
+	</p-dialog>
     
 
     <!-- Ticket Dialogue ends-->

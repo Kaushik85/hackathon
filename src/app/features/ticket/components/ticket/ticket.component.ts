@@ -34,6 +34,7 @@ export class TicketComponent implements OnInit {
   ticketRows: TicketRow[] = []
   items: MenuItem[] | undefined;
   activeItem: MenuItem | undefined;
+  comments: TicketComment[] = []
   
   token: string | any
   refreshInProgress: boolean = false
@@ -112,7 +113,8 @@ export class TicketComponent implements OnInit {
       .subscribe({
         next: (ticketDetails) => {
           console.log('Fetched comments:', ticketDetails);     
-          this.renderComments(ticketDetails.comments)
+          this.comments = ticketDetails.comments
+          this.viewDialogeVisible = true
         },      
         error: (error) => {
           if (error instanceof HttpErrorResponse && error.status == HttpStatusCode.Forbidden) {
@@ -176,33 +178,4 @@ export class TicketComponent implements OnInit {
         }
       });
   }
-
-   renderComments(comments : TicketComment[]) {
-      console.log('Rendering comments in renderer:', comments);
-      this.viewDialogeVisible = true
-      const commentsSection = document.getElementById('comments-section');
-      if (!commentsSection) {
-          console.error('Comments section element not found.');
-          return;
-      }
-      
-        commentsSection.innerHTML = '';
-        if (comments.length === 0) {
-            commentsSection.innerHTML = '<p class="text-gray-500 text-sm">No comments yet. Be the first to add one!</p>';
-        } else {
-            console.log('Number of comments to render:', comments.length);
-            for (let i = 0; i < comments.length; i++) {
-                    const comment = comments[i];
-                    console.log('Rendering comment:', comment);
-                    const commentBox = document.createElement('div');
-                    commentBox.className = 'comment-box';
-                    commentBox.innerHTML = `
-                        <p class="comment-author">${comment.author}</p>
-                        <p class="comment-date">${comment.date}</p>
-                        <p class="comment-text">${comment.message}</p>
-                    `;
-                    commentsSection.appendChild(commentBox);
-                }
-        }
-    }
 }
